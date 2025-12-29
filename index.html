@@ -1,149 +1,118 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.3">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000; min-height: 14.0px}
-    span.s1 {font-kerning: none}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BB-MF Alias Game - Coding Edition</title>
+    <style>
+        :root { --bg: #1e1e1e; --card-bg: #252526; --text: #d4d4d4; --blue: #0e639c; --red: #f44747; --green: #6a9955; --orange: #ce9178; --border: #3c3c3c; }
+        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Courier New', monospace; display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
+        .scoreboard { display: flex; gap: 40px; margin-bottom: 30px; background: var(--card-bg); padding: 15px 30px; border-radius: 8px; border: 1px solid var(--border); }
+        .team { text-align: center; }
+        .team h2 { margin: 0; font-size: 1rem; color: #569cd6; }
+        .score { font-size: 2.5rem; font-weight: bold; color: var(--orange); }
+        .score-controls button { padding: 5px 15px; margin-top: 5px; cursor: pointer; background: transparent; border: 1px solid var(--border); color: var(--text); }
+        .timer { font-size: 3rem; font-weight: bold; color: var(--red); margin-bottom: 20px; font-variant-numeric: tabular-nums; }
+        .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 40px; width: 380px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position: relative; }
+        h1 { color: #569cd6; font-size: 2.2rem; margin: 0 0 15px 0; }
+        .forbidden { list-style: none; padding: 0; margin: 20px 0; font-size: 1.3rem; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 15px 0; }
+        .forbidden li { color: var(--red); margin: 5px 0; }
+        .forbidden li::before { content: "✕ "; font-size: 1rem; }
+        .hint { color: var(--green); font-size: 0.95rem; margin-top: 20px; line-height: 1.4; opacity: 0.8; }
+        .actions { display: flex; flex-direction: column; gap: 10px; margin-top: 30px; }
+        .btn-main { background: var(--blue); color: white; border: none; padding: 15px; border-radius: 4px; cursor: pointer; font-size: 1.1rem; font-weight: bold; }
+        .btn-main:hover { background: #1177bb; }
+        .btn-reset { background: transparent; color: #888; border: none; text-decoration: underline; cursor: pointer; margin-top: 20px; }
+    </style>
 </head>
 <body>
-<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
-<p class="p1"><span class="s1">&lt;html lang="he" dir="rtl"&gt;</span></p>
-<p class="p1"><span class="s1">&lt;head&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;title&gt;BB-MF Alias Game - Coding Edition&lt;/title&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;style&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>:root { --bg: #1e1e1e; --card-bg: #252526; --text: #d4d4d4; --blue: #0e639c; --red: #f44747; --green: #6a9955; --orange: #ce9178; --border: #3c3c3c; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Courier New', monospace; display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.scoreboard { display: flex; gap: 40px; margin-bottom: 30px; background: var(--card-bg); padding: 15px 30px; border-radius: 8px; border: 1px solid var(--border); }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.team { text-align: center; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.team h2 { margin: 0; font-size: 1rem; color: #569cd6; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.score { font-size: 2.5rem; font-weight: bold; color: var(--orange); }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.score-controls button { padding: 5px 15px; margin-top: 5px; cursor: pointer; background: transparent; border: 1px solid var(--border); color: var(--text); }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.timer { font-size: 3rem; font-weight: bold; color: var(--red); margin-bottom: 20px; font-variant-numeric: tabular-nums; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 40px; width: 380px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position: relative; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>h1 { color: #569cd6; font-size: 2.2rem; margin: 0 0 15px 0; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.forbidden { list-style: none; padding: 0; margin: 20px 0; font-size: 1.3rem; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 15px 0; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.forbidden li { color: var(--red); margin: 5px 0; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.forbidden li::before { content: "✕ "; font-size: 1rem; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.hint { color: var(--green); font-size: 0.95rem; margin-top: 20px; line-height: 1.4; opacity: 0.8; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.actions { display: flex; flex-direction: column; gap: 10px; margin-top: 30px; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.btn-main { background: var(--blue); color: white; border: none; padding: 15px; border-radius: 4px; cursor: pointer; font-size: 1.1rem; font-weight: bold; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.btn-main:hover { background: #1177bb; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.btn-reset { background: transparent; color: #888; border: none; text-decoration: underline; cursor: pointer; margin-top: 20px; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
-<p class="p1"><span class="s1">&lt;body&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="scoreboard"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="team"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;h2&gt;TEAM_A (Front)&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="score" id="scoreA"&gt;0&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="score-controls"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;button onclick="updateScore('A', 1)"&gt;++&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;button onclick="updateScore('A', -1)"&gt;--&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="team"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;h2&gt;TEAM_B (Back)&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="score" id="scoreB"&gt;0&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="score-controls"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;button onclick="updateScore('B', 1)"&gt;++&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;button onclick="updateScore('B', -1)"&gt;--&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="timer" id="timer"&gt;60s&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="card"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h1 id="word"&gt;Ready?&lt;/h1&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;ul class="forbidden" id="forbiddenList"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;li style="list-style: none; color: #888;"&gt;לחצו על הכפתור למטה להתחלה&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/ul&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="hint" id="hint"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="actions"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;button class="btn-main" id="actionBtn" onclick="nextWord()"&gt;START_ROUND&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;button class="btn-reset" onclick="resetGame()"&gt;RESET_ALL&lt;/button&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const cards = [</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ word: "Oron BigBrain", forbidden: ["אורון", "ראש צוות", "שקדים", "חניה", "אבא"], hint: "מחלה או חופשת לידה? 'תעשו דיילי בלעדי, אני מחפש חניה'." },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ word: "Lior1207", forbidden: ["ליאור", "שיפוץ", "סקי", "אילוסטרציה", "B2B"], hint: "תמיד ב-Back to Back, עוברת במעלית בין שיפוץ ל-AI Roadmap." },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ word: "גד BBMF", forbidden: ["גד", "מטבח", "מניה", "חרדה", "טאקה"], hint: "מחכה לבלקאוט שיגמר כדי לקנות מטבח חדש. 'אינעל העולם'." },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ word: "Yoav Gaulan", forbidden: ["יואב", "תאילנד", "ברלין", "בננות", "נאנו"], hint: "גמר לנאנו את כל הבננות והביא פטריות מברלין." },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ word: "Oz Bbmf Monday", forbidden: ["עוז", "מדרגות", "סושי", "כושר", "סקר"], hint: "טיפס את כל המגדל ברגל והוציא סקר על סדנת סושי." },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ word: "Asaf BBMF", forbidden: ["אסף", "סוריה", "ספא", "דרימי", "מילואים"], hint: "ד״ש מסוריה בבוקר, ספא בצהריים, ודריימי שבור בערב." },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ word: "Gal Baruch", forbidden: ["גל", "חדש", "מצחיק", "חם", "מסיבה"], hint: "בחור מצחיק אך רציני שהתפשט במסיבה כי היה לו חם." },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ word: "סינגולריות", forbidden: ["לילה", "סקריפט", "ענן", "מחשב", "הרצה"], hint: "הלילה שבו הפכנו למכונה אחת והרצנו 1.5 מיליון תמונות." },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ word: "נאנו בננה", forbidden: ["AI", "מודל", "יואב", "קרדיט", "בננה"], hint: "הסיבה שנגמרו לצוות כל הטוקנים השנה." },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ word: "מעלית", forbidden: ["קומה", "דיילי", "לונה פארק", "תקוע", "27"], hint: "חדר הישיבות הכי פעיל בבניין, במיוחד כשאין חניה ברובינשטיין." },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ word: "בית רובינשטיין", forbidden: ["חניה", "אוטו", "אורון", "איחור", "פקק"], hint: "התירוץ המושלם לאיחור לדיילי בבוקר." },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ word: "אוריאנה", forbidden: ["מנקה", "פלורנטין", "גד", "60", "שוטף"], hint: "היא עושה את ה-Heavy stuff, הדריימי עושה רק בשוטף." },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ word: "Taka (טאקה)", forbidden: ["גד", "מוצר", "וואטסאפ", "הנפקה", "מניה"], hint: "הפרויקט שגד רוצה להנפיק כדי להציל את המטבח." }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>];</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let timeLeft = 60;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let timerId = null;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let scores = { A: 0, B: 0 };</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let isPlaying = false;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function updateScore(team, val) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>scores[team] += val;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById(`score${team}`).innerText = scores[team];</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function startTimer() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>timeLeft = 60;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>isPlaying = true;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('actionBtn').innerText = "NEXT_WORD";</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('timer').innerText = timeLeft + "s";</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>timerId = setInterval(() =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>timeLeft--;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>document.getElementById('timer').innerText = timeLeft + "s";</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (timeLeft &lt;= 0) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>clearInterval(timerId);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>isPlaying = false;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>document.getElementById('actionBtn').innerText = "TIME_UP!";</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>alert("ROUND OVER!");</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}, 1000);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function nextWord() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (!isPlaying) startTimer();</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const randomIndex = Math.floor(Math.random() * cards.length);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const card = cards[randomIndex];</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('word').innerText = card.word;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('hint').innerText = card.hint;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const list = document.getElementById('forbiddenList');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>list.innerHTML = "";</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>card.forbidden.forEach(w =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const li = document.createElement('li');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>li.innerText = w;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>list.appendChild(li);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function resetGame() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>location.reload();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+    <div class="scoreboard">
+        <div class="team">
+            <h2>TEAM_A (Front)</h2>
+            <div class="score" id="scoreA">0</div>
+            <div class="score-controls">
+                <button onclick="updateScore('A', 1)">++</button>
+                <button onclick="updateScore('A', -1)">--</button>
+            </div>
+        </div>
+        <div class="team">
+            <h2>TEAM_B (Back)</h2>
+            <div class="score" id="scoreB">0</div>
+            <div class="score-controls">
+                <button onclick="updateScore('B', 1)">++</button>
+                <button onclick="updateScore('B', -1)">--</button>
+            </div>
+        </div>
+    </div>
+    <div class="timer" id="timer">60s</div>
+    <div class="card">
+        <h1 id="word">Ready?</h1>
+        <ul class="forbidden" id="forbiddenList">
+            <li style="list-style: none; color: #888;">לחצו על הכפתור למטה להתחלה</li>
+        </ul>
+        <div class="hint" id="hint"></div>
+        <div class="actions">
+            <button class="btn-main" id="actionBtn" onclick="nextWord()">START_ROUND</button>
+        </div>
+    </div>
+    <button class="btn-reset" onclick="resetGame()">RESET_ALL</button>
+    <script>
+        const cards = [
+            { word: "Oron BigBrain", forbidden: ["אורון", "ראש צוות", "שקדים", "חניה", "אבא"], hint: "מחלה או חופשת לידה? 'תעשו דיילי בלעדי, אני מחפש חניה'." },
+            { word: "Lior1207", forbidden: ["ליאור", "שיפוץ", "סקי", "אילוסטרציה", "B2B"], hint: "תמיד ב-Back to Back, עוברת במעלית בין שיפוץ ל-AI Roadmap." },
+            { word: "גד BBMF", forbidden: ["גד", "מטבח", "מניה", "חרדה", "טאקה"], hint: "מחכה לבלקאוט שיגמר כדי לקנות מטבח חדש. 'אינעל העולם'." },
+            { word: "Yoav Gaulan", forbidden: ["יואב", "תאילנד", "ברלין", "בננות", "נאנו"], hint: "גמר לנאנו את כל הבננות והביא פטריות מברלין." },
+            { word: "Oz Bbmf Monday", forbidden: ["עוז", "מדרגות", "סושי", "כושר", "סקר"], hint: "טיפס את כל המגדל ברגל והוציא סקר על סדנת סושי." },
+            { word: "Asaf BBMF", forbidden: ["אסף", "סוריה", "ספא", "דרימי", "מילואים"], hint: "ד״ש מסוריה בבוקר, ספא בצהריים, ודריימי שבור בערב." },
+            { word: "Gal Baruch", forbidden: ["גל", "חדש", "מצחיק", "חם", "מסיבה"], hint: "בחור מצחיק אך רציני שהתפשט במסיבה כי היה לו חם." },
+            { word: "סינגולריות", forbidden: ["לילה", "סקריפט", "ענן", "מחשב", "הרצה"], hint: "הלילה שבו הפכנו למכונה אחת והרצנו 1.5 מיליון תמונות." },
+            { word: "נאנו בננה", forbidden: ["AI", "מודל", "יואב", "קרדיט", "בננה"], hint: "הסיבה שנגמרו לצוות כל הטוקנים השנה." },
+            { word: "מעלית", forbidden: ["קומה", "דיילי", "לונה פארק", "תקוע", "27"], hint: "חדר הישיבות הכי פעיל בבניין, במיוחד כשאין חניה ברובינשטיין." },
+            { word: "בית רובינשטיין", forbidden: ["חניה", "אוטו", "אורון", "איחור", "פקק"], hint: "התירוץ המושלם לאיחור לדיילי בבוקר." },
+            { word: "אוריאנה", forbidden: ["מנקה", "פלורנטין", "גד", "60", "שוטף"], hint: "היא עושה את ה-Heavy stuff, הדריימי עושה רק בשוטף." },
+            { word: "Taka (טאקה)", forbidden: ["גד", "מוצר", "וואטסאפ", "הנפקה", "מניה"], hint: "הפרויקט שגד רוצה להנפיק כדי להציל את המטבח." }
+        ];
+        let timeLeft = 60;
+        let timerId = null;
+        let scores = { A: 0, B: 0 };
+        let isPlaying = false;
+        function updateScore(team, val) {
+            scores[team] += val;
+            document.getElementById(`score${team}`).innerText = scores[team];
+        }
+        function startTimer() {
+            timeLeft = 60;
+            isPlaying = true;
+            document.getElementById('actionBtn').innerText = "NEXT_WORD";
+            document.getElementById('timer').innerText = timeLeft + "s";
+            timerId = setInterval(() => {
+                timeLeft--;
+                document.getElementById('timer').innerText = timeLeft + "s";
+                if (timeLeft <= 0) {
+                    clearInterval(timerId);
+                    isPlaying = false;
+                    document.getElementById('actionBtn').innerText = "TIME_UP!";
+                    alert("ROUND OVER!");
+                }
+            }, 1000);
+        }
+        function nextWord() {
+            if (!isPlaying) startTimer();
+            const randomIndex = Math.floor(Math.random() * cards.length);
+            const card = cards[randomIndex];
+            document.getElementById('word').innerText = card.word;
+            document.getElementById('hint').innerText = card.hint;
+            const list = document.getElementById('forbiddenList');
+            list.innerHTML = "";
+            card.forbidden.forEach(w => {
+                const li = document.createElement('li');
+                li.innerText = w;
+                list.appendChild(li);
+            });
+        }
+        function resetGame() {
+            location.reload();
+        }
+    </script>
 </body>
 </html>
